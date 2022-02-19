@@ -1,5 +1,6 @@
 import React, { ReactNode, FC } from 'react'
 import { ColumnConfig, Styles } from '../Table/Table'
+import ReactJson from 'react-json-view'
 
 interface TableCellProps {
   column: string | ColumnConfig
@@ -41,7 +42,7 @@ const TableCell: FC<TableCellProps> = ({
 
     return typeof column !== 'string' && column.component
       ? column.component(value)
-      : JSON.stringify(value)
+      : <ReactJson src={value} />
   }
 
   // when nodeStyle is a function that is selective styling as function decides should and which css class will be returned.

@@ -27,10 +27,12 @@
   ],
   "peerDependencies": {
     "@apollo/client": "^3.0.0",
-    "react": "^17.0.0",
-    "graphql": "^15.0.0"
+    "graphql": "^15.0.0",
+    "react": "^17.0.0"
   },
-  "dependencies": {},
+  "dependencies": {
+    "react-json-view": "^1.21.3"
+  },
   "scripts": {
     "test": "jest",
     "test:watch": "jest --watch",
