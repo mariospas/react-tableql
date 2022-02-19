@@ -61,7 +61,7 @@ typings/
 .next
 
 # build output for publish
-build
+#build
 
 # vs code
 .vscode
