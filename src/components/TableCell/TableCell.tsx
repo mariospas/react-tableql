@@ -45,7 +45,7 @@ const TableCell: FC<TableCellProps> = ({
     } else {
       if (Array.isArray(value))
       {
-        return <ReactJson src={JSON.parse(JSON.stringify(value))} collapsed={true} />
+        return <ReactJson src={JSON.parse(JSON.stringify(value))} collapsed={true} theme={'monokai'}/>
       } else {
         return value
       }
