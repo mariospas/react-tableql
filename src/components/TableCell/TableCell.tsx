@@ -45,7 +45,7 @@ const TableCell: FC<TableCellProps> = ({
     } else {
       if (Array.isArray(value))
       {
-        return <ReactJson src={JSON.parse(JSON.stringify(value))} />
+        return <ReactJson src={JSON.parse(JSON.stringify(value))} collapsed={true} />
       } else {
         return value
       }
