@@ -49,7 +49,7 @@ const TableCell: FC<TableCellProps> = ({
       {
         return <ReactJson src={JSON.parse(JSON.stringify(value))} collapsed={true} theme={'monokai'}/>
       } else {
-        return <span onClick={() => callback? callback(): undefined}>value</span>
+        return <span onClick={() => callback? callback(): undefined}>{value}</span>
       }
     }
   }

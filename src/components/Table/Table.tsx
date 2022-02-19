@@ -108,7 +108,7 @@ const Table: FC<Props> = ({
             styles={styles}
             columnIndex={columnIndex}
             data={data}
-            callback={onRowClick ? (e) => {e.persist(); onRowClick(data);} : undefined}
+            callback={onRowClick ? () => onRowClick(data) : undefined}
           />
           // <td
           //   className={`
