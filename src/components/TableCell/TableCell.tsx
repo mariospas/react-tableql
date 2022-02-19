@@ -7,6 +7,7 @@ interface TableCellProps {
   columnIndex: number
   styles: Styles
   data: { [key: string]: unknown }
+  callback?: Function
 }
 
 const TableCell: FC<TableCellProps> = ({
@@ -14,6 +15,7 @@ const TableCell: FC<TableCellProps> = ({
   columnIndex,
   styles,
   data,
+  callback,
 }) => {
   const getNodeValue: string | ReactNode | any = (
     column: string | ColumnConfig,
@@ -47,7 +49,7 @@ const TableCell: FC<TableCellProps> = ({
       {
         return <ReactJson src={JSON.parse(JSON.stringify(value))} collapsed={true} theme={'monokai'}/>
       } else {
-        return value
+        return <span onClick={() => callback? callback(): undefined}>value</span>
       }
     }
   }

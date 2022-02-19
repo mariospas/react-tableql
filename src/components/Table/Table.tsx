@@ -99,7 +99,7 @@ const Table: FC<Props> = ({
       <tr
         key={`TableQLRow${JSON.stringify(data)}`}
         className={styles.tbodyTr || 'TableQL-tr'}
-        onClick={onRowClick ? (e) => {e.persist(); onRowClick(data);} : undefined}
+        // onClick={onRowClick ? (e) => {e.persist(); onRowClick(data);} : undefined}
       >
         {dataKeys.map((column: string | ColumnConfig, columnIndex: number) => (
           <TableCell
@@ -108,6 +108,7 @@ const Table: FC<Props> = ({
             styles={styles}
             columnIndex={columnIndex}
             data={data}
+            callback={onRowClick ? (e) => {e.persist(); onRowClick(data);} : undefined}
           />
           // <td
           //   className={`

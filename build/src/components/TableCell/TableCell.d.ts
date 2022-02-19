@@ -7,6 +7,7 @@ interface TableCellProps {
     data: {
         [key: string]: unknown;
     };
+    callback?: Function;
 }
 declare const TableCell: FC<TableCellProps>;
 export default TableCell;
