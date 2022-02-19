@@ -42,7 +42,7 @@ const TableCell: FC<TableCellProps> = ({
 
     return typeof column !== 'string' && column.component
       ? column.component(value)
-      : <ReactJson src={value} />
+      : <ReactJson src={JSON.parse(JSON.stringify(value))} />
   }
 
   // when nodeStyle is a function that is selective styling as function decides should and which css class will be returned.
