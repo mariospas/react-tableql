@@ -40,9 +40,16 @@ const TableCell: FC<TableCellProps> = ({
       value = value[key]
     })
 
-    return typeof column !== 'string' && column.component
-      ? column.component(value)
-      : <ReactJson src={JSON.parse(JSON.stringify(value))} />
+    if(typeof column !== 'string' && column.component) {
+      return column.component(value)
+    } else {
+      if (Array.isArray(value))
+      {
+        return <ReactJson src={JSON.parse(JSON.stringify(value))} />
+      } else {
+        return value
+      }
+    }
   }
 
   // when nodeStyle is a function that is selective styling as function decides should and which css class will be returned.
