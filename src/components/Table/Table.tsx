@@ -95,12 +95,15 @@ const Table: FC<Props> = ({
     displayData: { [key: string]: unknown }[],
     dataKeys: (string | ColumnConfig)[],
   ) => {
-    return displayData.map((data: { [key: string]: unknown }) => (
+    return displayData.map((data: { [key: string]: unknown }, rowIndex: number) => (
       <tr
         key={`TableQLRow${JSON.stringify(data)}`}
         className={styles.tbodyTr || 'TableQL-tr'}
         // onClick={onRowClick ? (e) => {e.persist(); onRowClick(data);} : undefined}
       >
+        <td className="TableQL-td">
+          {rowIndex}
+        </td>
         {dataKeys.map((column: string | ColumnConfig, columnIndex: number) => (
           <TableCell
             key={`TableCell${JSON.stringify(column)}`}
@@ -127,43 +130,51 @@ const Table: FC<Props> = ({
   }
 
   const renderTableHeader = (dataKeys: (string | ColumnConfig)[]) => {
-    return dataKeys.map(
-      (column: string | ColumnConfig, columnIndex: number) => (
-        <th
-          className={`${styles.theadTh || 'TableQL-thead-th'} ${
-            column && typeof column !== 'string' && column.headerStyle
-              ? column.headerStyle
-              : ''
-          } ${
-            (column && typeof column !== 'string' && column.sort) || sort
-              ? 'TableQL-thead-th-sort'
-              : ''
-          }`}
-          key={`TableQLHeader${
-            typeof column === 'string' ? column : column.id + columnIndex
-          }`}
-          onClick={() => {
-            if (
-              typeof column !== 'string' &&
-              !column.sort &&
-              !sort &&
-              onSort === undefined
-            )
-              return
-            log('Header sort was clicked: ', column)
+    return [
+      <th className="TableQL-thead-th  TableQL-thead-th-sort">#
+        <div className="TableQL-thead-th-sort-arrows">
+          <div className="TableQL-thead-th-sort-arrow-up"></div>
+          <div className="TableQL-thead-th-sort-arrow-down"></div>
+        </div>
+      </th>,
+      {...dataKeys.map(
+        (column: string | ColumnConfig, columnIndex: number) => (
+          <th
+            className={`${styles.theadTh || 'TableQL-thead-th'} ${
+              column && typeof column !== 'string' && column.headerStyle
+                ? column.headerStyle
+                : ''
+            } ${
+              (column && typeof column !== 'string' && column.sort) || sort
+                ? 'TableQL-thead-th-sort'
+                : ''
+            }`}
+            key={`TableQLHeader${
+              typeof column === 'string' ? column : column.id + columnIndex
+            }`}
+            onClick={() => {
+              if (
+                typeof column !== 'string' &&
+                !column.sort &&
+                !sort &&
+                onSort === undefined
+              )
+                return
+              log('Header sort was clicked: ', column)
 
-            onSort !== undefined && onSort(column)
-          }}
-        >
-          {typeof column === 'string'
-            ? formatLabel(column)
-            : column.label || formatLabel(column.id)}
-          {((typeof column !== 'string' && column.sort) || sort) && (
-            <SortArrows />
-          )}
-        </th>
-      ),
-    )
+              onSort !== undefined && onSort(column)
+            }}
+          >
+            {typeof column === 'string'
+              ? formatLabel(column)
+              : column.label || formatLabel(column.id)}
+            {((typeof column !== 'string' && column.sort) || sort) && (
+              <SortArrows />
+            )}
+          </th>
+        ),
+      )}
+    ]
   }
 
   // when nodeStyle is a function that is selective styling as function decides should and which css class will be returned.
