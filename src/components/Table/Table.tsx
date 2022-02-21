@@ -101,7 +101,10 @@ const Table: FC<Props> = ({
         className={styles.tbodyTr || 'TableQL-tr'}
         // onClick={onRowClick ? (e) => {e.persist(); onRowClick(data);} : undefined}
       >
-        <td className="TableQL-td">
+        <td
+          className="TableQL-td"
+          key={`TableCellRowIndex`}
+        >
           {rowIndex}
         </td>
         {dataKeys.map((column: string | ColumnConfig, columnIndex: number) => (
@@ -131,7 +134,10 @@ const Table: FC<Props> = ({
 
   const renderTableHeader = (dataKeys: (string | ColumnConfig)[]) => {
     return [
-      <th className="TableQL-thead-th  TableQL-thead-th-sort">#
+      <th className="TableQL-thead-th  TableQL-thead-th-sort"
+          key={`TableQLHeaderRowIndex`}
+      >
+        #
         <div className="TableQL-thead-th-sort-arrows">
           <div className="TableQL-thead-th-sort-arrow-up"></div>
           <div className="TableQL-thead-th-sort-arrow-down"></div>
