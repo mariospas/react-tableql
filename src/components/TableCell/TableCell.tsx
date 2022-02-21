@@ -42,14 +42,23 @@ const TableCell: FC<TableCellProps> = ({
       value = value[key]
     })
 
-    if(typeof column !== 'string' && column.component) {
+    if (typeof column !== 'string' && column.component) {
       return column.component(value)
     } else {
-      if (Array.isArray(value))
-      {
-        return <ReactJson src={JSON.parse(JSON.stringify(value))} collapsed={true} theme={'monokai'}/>
+      if (Array.isArray(value) || typeof value === 'object') {
+        return (
+          <ReactJson
+            src={JSON.parse(JSON.stringify(value))}
+            collapsed={true}
+            theme={'monokai'}
+          />
+        )
       } else {
-        return <span onClick={() => callback? callback(): undefined}>{value}</span>
+        return (
+          <span onClick={() => (callback ? callback() : undefined)}>
+            {value}
+          </span>
+        )
       }
     }
   }
