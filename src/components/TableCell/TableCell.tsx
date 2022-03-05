@@ -46,12 +46,12 @@ const TableCell: FC<TableCellProps> = ({
       return column.component(value)
     } else {
       if (!value) {
-        return (
-          <span onClick={() => (callback ? callback() : undefined)}>
-
-          </span>
-        )
-      } else if (Array.isArray(value) || typeof value === 'object') {
+        return <span onClick={() => (callback ? callback() : undefined)}></span>
+      } else if (
+        Array.isArray(value) ||
+        typeof value === 'object' ||
+        typeof value === 'boolean'
+      ) {
         return (
           <ReactJson
             src={JSON.parse(JSON.stringify(value))}
