@@ -59,9 +59,11 @@ const TableCell: FC<TableCellProps> = ({
           />
         )
       } else if (typeof value === 'boolean') {
-          <span onClick={() => (callback ? callback() : undefined)}>
-            {String(value)}
-          </span>
+          return(
+            <span onClick={() => (callback ? callback() : undefined)}>
+              {String(value)}
+            </span>
+          )
       } else {
         return (
           <span onClick={() => (callback ? callback() : undefined)}>
