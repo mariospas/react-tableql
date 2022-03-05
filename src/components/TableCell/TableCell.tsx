@@ -49,8 +49,7 @@ const TableCell: FC<TableCellProps> = ({
         return <span onClick={() => (callback ? callback() : undefined)}></span>
       } else if (
         Array.isArray(value) ||
-        typeof value === 'object' ||
-        typeof value === 'boolean'
+        typeof value === 'object'
       ) {
         return (
           <ReactJson
@@ -59,6 +58,10 @@ const TableCell: FC<TableCellProps> = ({
             theme={'monokai'}
           />
         )
+      } else if (typeof value === 'boolean') {
+          <span onClick={() => (callback ? callback() : undefined)}>
+            {String(value)}
+          </span>
       } else {
         return (
           <span onClick={() => (callback ? callback() : undefined)}>
